@@ -8,15 +8,14 @@ export class UsersController {
 
   @Post('/login')
   async login(@Body() payload: LoginInput) {
-      console.log('payload', payload)
     const { data, error } = await this.service.findByEmail(payload.email);
     if (error) {
-      throw new HttpException('Email not found', 404);
+      throw new HttpException('Correo no encontrado', 404);
     }
     if (data.password === payload.password) {
-      return { message: 'Login Successfull' };
+      return { message: 'Inicio de sesion exitoso' };
     } else {
-      return { message: 'Incorrect password' };
+      throw new HttpException('Contraseña incorrecta', 404);
     }
   }
 }
