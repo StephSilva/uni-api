@@ -4,6 +4,10 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UserModule } from './user/user.module';
+import { ClientModule } from './client/client.module';
+import { JournalVoucherModule } from './journal-voucher/journal-voucher.module';
+import { CompanyModule } from './company/company.module';
+import { SalesModule } from './sales/sales.module';
 
 @Module({
   imports: [
@@ -20,6 +24,10 @@ import { UserModule } from './user/user.module';
       logging: true
     }),
     UserModule,
+    ClientModule,
+    JournalVoucherModule,
+    CompanyModule,
+    SalesModule,
   ],
   controllers: [AppController],
   providers: [AppService],
