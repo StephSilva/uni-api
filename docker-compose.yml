@@ -1,23 +1,17 @@
 version: '3.8'
 services:
-  mysql:
-    image: mariadb:10.5.5
-    container_name: paymentdatabase
-    restart: always
-    environment:
-      MYSQL_ROOT_PASSWORD: '${MYSQL_ROOT_PASSWORD}'
-      MYSQL_USER: '${DATABASE_USERNAME}'
-      MYSQL_PASSWORD: '${DATABASE_PASSWORD}'
-      MYSQL_DATABASE: '${DATABASE_NAME}'
-    volumes:
-      - mysqldata:/var/lib/mysql
-      - ./mysqlconfig:/etc/mysql/conf.d
-      - ./init:/docker-entrypoint-initdb.d
-    env_file:
-      - .env
-    command: --default-authentication-plugin=mysql_native_password
+  mssql:
+    container_name: sql-server-db
+    image: topaztechnology/mssql-server-linux
     ports:
-      - '${DATABASE_PORT}:${DATABASE_PORT}'
+      - "1433:1433"
+    environment:
+      - ACCEPT_EULA:"Y"
+      - SQL_USER:${DATABASE_USERNAME}
+      - SQL_PASSWORD:${DATABASE_PASSWORD}
+      - SQL_DB:${DATABASE_NAME}
+    volumes:
+      - mssql-data:/var/opt/mssql
   api:
     container_name: 'api'
     env_file:
@@ -32,18 +26,3 @@ services:
     volumes:
       - .:/app/
       - /app/node_modules
-  phpmyadmin:
-    image: phpmyadmin/phpmyadmin
-    env_file:
-      - .env
-    links:
-      - mysql
-    environment:
-      PMA_HOST: mysql
-      MYSQL_ROOT_PASSWORD: '${MYSQL_ROOT_PASSWORD}'
-    ports:
-      - 80:80
-    depends_on:
-      - mysql
-volumes:
-  mysqldata: {}
