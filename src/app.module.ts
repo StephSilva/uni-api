@@ -3,11 +3,14 @@ import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { UserModule } from './user/user.module';
-import { ClientModule } from './client/client.module';
-import { JournalVoucherModule } from './journal-voucher/journal-voucher.module';
-import { CompanyModule } from './company/company.module';
-import { SalesModule } from './sales/sales.module';
+import { ClienteModule } from './cliente/cliente.module';
+import { EmpresasModule } from './empresas/empresas.module';
+import { ComprobanteDiarioModule } from './comprobante-diario/comprobante-diario.module';
+import { FacturasModule } from './facturas/facturas.module';
+import { UsuarioModule } from './usuario/usuario.module';
+import { AutenticacionModule } from './autenticacion/autenticacion.module';
+import { RolesModule } from './roles/roles.module';
+import { ThrottlerModule } from '@nestjs/throttler';
 
 @Module({
   imports: [
@@ -20,14 +23,21 @@ import { SalesModule } from './sales/sales.module';
       password: process.env.DATABASE_PASSWORD,
       database: process.env.DATABASE_NAME,
       autoLoadEntities: true,
+      // dropSchema: true,
       synchronize: true,
-      logging: true
+      logging: true,
     }),
-    UserModule,
-    ClientModule,
-    JournalVoucherModule,
-    CompanyModule,
-    SalesModule,
+    ThrottlerModule.forRoot({
+      ttl: 60,
+      limit: 10,
+    }),
+    ClienteModule,
+    EmpresasModule,
+    ComprobanteDiarioModule,
+    FacturasModule,
+    UsuarioModule,
+    AutenticacionModule,
+    RolesModule,
   ],
   controllers: [AppController],
   providers: [AppService],
