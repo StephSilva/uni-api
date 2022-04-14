@@ -23,7 +23,6 @@ import { ThrottlerModule } from '@nestjs/throttler';
       password: process.env.DATABASE_PASSWORD,
       database: process.env.DATABASE_NAME,
       autoLoadEntities: true,
-      // dropSchema: true,
       synchronize: true,
       logging: true,
     }),
