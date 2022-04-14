@@ -7,6 +7,9 @@ export class Cliente extends BaseEntity {
   @Column()
   nombre: string;
 
+  @Column({ name: 'empresaId' })
+  empresaId: string;
+
   @ManyToOne(() => Empresa, (empresa) => empresa.clientes)
   empresa: Empresa;
 }

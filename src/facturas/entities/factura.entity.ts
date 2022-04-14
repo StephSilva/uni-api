@@ -22,6 +22,9 @@ export class Factura extends BaseEntity {
   @Column()
   ventasGrabadas: number;
 
+  @Column({ name: 'empresaId' })
+  empresaId: string;
+
   @ManyToOne(() => Empresa, (empresa) => empresa.facturas)
   empresa: Empresa;
 }

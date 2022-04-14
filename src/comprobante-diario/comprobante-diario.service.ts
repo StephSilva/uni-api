@@ -1,26 +1,34 @@
 import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 import { CreateComprobanteDiarioDto } from './dto/create-comprobante-diario.dto';
 import { UpdateComprobanteDiarioDto } from './dto/update-comprobante-diario.dto';
+import { ComprobanteDiario } from './entities/comprobante-diario.entity';
 
 @Injectable()
 export class ComprobanteDiarioService {
+  constructor(
+    @InjectRepository(ComprobanteDiario)
+    private repository: Repository<ComprobanteDiario>,
+  ) {}
+
   create(createComprobanteDiarioDto: CreateComprobanteDiarioDto) {
-    return 'This action adds a new comprobanteDiario';
+    return this.repository.save(createComprobanteDiarioDto);
   }
 
   findAll() {
-    return `This action returns all comprobanteDiario`;
+    return this.repository.find({ relations: ['empresa'] });
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} comprobanteDiario`;
+  findOne(id: string) {
+    return this.repository.findOneOrFail(id);
   }
 
-  update(id: number, updateComprobanteDiarioDto: UpdateComprobanteDiarioDto) {
-    return `This action updates a #${id} comprobanteDiario`;
+  update(id: string, updateComprobanteDiarioDto: UpdateComprobanteDiarioDto) {
+    return this.repository.update(id, updateComprobanteDiarioDto);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} comprobanteDiario`;
+  remove(id: string) {
+    return this.repository.softDelete(id);
   }
 }

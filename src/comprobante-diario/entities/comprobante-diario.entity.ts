@@ -19,6 +19,9 @@ export class ComprobanteDiario extends BaseEntity {
   @Column()
   haber: number;
 
+  @Column({ name: 'empresaId' })
+  empresaId: string;
+
   @ManyToOne(() => Empresa, (empresa) => empresa.comprobantesDiario)
   empresa: Empresa;
 }

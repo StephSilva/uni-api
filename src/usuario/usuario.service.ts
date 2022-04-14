@@ -30,7 +30,10 @@ export class UsuarioService {
   }
 
   findAll(filterOptions: FilterOptionsDto) {
-    return this.repository.find({ where: filterOptions ?? {} });
+    return this.repository.find({
+      where: filterOptions ?? {},
+      relations: ['rol'],
+    });
   }
 
   findOne(id: string) {
@@ -42,6 +45,6 @@ export class UsuarioService {
   }
 
   remove(id: string) {
-    return this.repository.softRemove({ id });
+    return this.repository.softDelete(id);
   }
 }
