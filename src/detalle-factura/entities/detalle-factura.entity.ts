@@ -17,6 +17,15 @@ export class DetalleFactura extends EntidadBase {
     @Column()
     total: number;
 
+    @Column({ name: "clienteId" })
+    clienteId: number;
+
+    @Column({ name: "empleadoId" })
+    empleadoId: number;
+
+    @Column({ name: "tipoPagoId" })
+    tipoPagoId: number;
+
     @OneToMany(() => TrabajoRealizado, (trabajosRealizados) => trabajosRealizados.detalleFactura)
     trabajosRealizados: TrabajoRealizado[];
 

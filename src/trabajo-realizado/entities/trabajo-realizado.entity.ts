@@ -12,6 +12,12 @@ export class TrabajoRealizado extends EntidadBase {
     @Column()
     precio: number;
 
+    @Column({ name: "tipoTrabajoId" })
+    tipoTrabajoId: number;
+
+    @Column({ name: "detalleFacturaId" })
+    detalleFacturaId: number;
+
     @ManyToOne(() => TipoTrabajo, (tipoTrabajo) => tipoTrabajo.trabajosRealizados)
     tipoTrabajo: TipoTrabajo;
 

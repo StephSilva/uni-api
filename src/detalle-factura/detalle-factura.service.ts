@@ -1,26 +1,35 @@
 import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 import { CreateDetalleFacturaDto } from './dto/create-detalle-factura.dto';
 import { UpdateDetalleFacturaDto } from './dto/update-detalle-factura.dto';
+import { DetalleFactura } from './entities/detalle-factura.entity';
 
 @Injectable()
 export class DetalleFacturaService {
+
+  constructor(
+    @InjectRepository(DetalleFactura)
+    private repositorio: Repository<DetalleFactura>,
+  ) {}
+
   create(createDetalleFacturaDto: CreateDetalleFacturaDto) {
-    return 'This action adds a new detalleFactura';
+    return this.repositorio.save(createDetalleFacturaDto);
   }
 
   findAll() {
-    return `This action returns all detalleFactura`;
+    return this.repositorio.find();
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} detalleFactura`;
+    return this.repositorio.findOneOrFail(id);
   }
 
   update(id: number, updateDetalleFacturaDto: UpdateDetalleFacturaDto) {
-    return `This action updates a #${id} detalleFactura`;
+    return this.repositorio.update(id, updateDetalleFacturaDto);
   }
 
   remove(id: number) {
-    return `This action removes a #${id} detalleFactura`;
+    return this.repositorio.softDelete(id);
   }
 }
