@@ -19,7 +19,7 @@ export class UsuarioService {
   }
 
   findAll() {
-    return this.repositorio.find();
+    return this.repositorio.find({ relations: ['rol'] });
   }
 
   buscarPorNombreUsuario(params: CreateLoginDto) {
