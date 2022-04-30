@@ -1,7 +1,8 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Req, Res } from '@nestjs/common';
 import { UsuarioService } from './usuario.service';
 import { CreateUsuarioDto } from './dto/create-usuario.dto';
 import { UpdateUsuarioDto } from './dto/update-usuario.dto';
+import { Request, Response } from 'express';
 
 @Controller('usuario')
 export class UsuarioController {
@@ -13,8 +14,14 @@ export class UsuarioController {
   }
 
   @Get()
-  findAll() {
-    return this.usuarioService.findAll();
+  async findAll(@Req() request: Request, @Res() response: Response) {
+    try {
+      // Le pasamos el texto a buscar que viene dentro del objeto request.query
+      const data = await this.usuarioService.findAll(request.query.nombre as string);
+      response.status(200).send(data);
+    } catch (error) {
+      response.status(400).send("Error al encontrar usuarios");
+    }
   }
 
   @Get(':id')
