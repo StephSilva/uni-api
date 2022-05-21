@@ -17,7 +17,7 @@ export class EmpleadoService {
   }
 
   findAll() {
-    return this.repositorio.find();
+    return this.repositorio.find({ relations: ['tipoEmpleado'] });
   }
 
   findOne(id: number) {

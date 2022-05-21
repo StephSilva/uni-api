@@ -1,4 +1,12 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { DetalleFacturaService } from './detalle-factura.service';
 import { CreateDetalleFacturaDto } from './dto/create-detalle-factura.dto';
 import { UpdateDetalleFacturaDto } from './dto/update-detalle-factura.dto';
@@ -19,11 +27,15 @@ export class DetalleFacturaController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
+    console.log('id', id);
     return this.detalleFacturaService.findOne(+id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateDetalleFacturaDto: UpdateDetalleFacturaDto) {
+  update(
+    @Param('id') id: string,
+    @Body() updateDetalleFacturaDto: UpdateDetalleFacturaDto,
+  ) {
     return this.detalleFacturaService.update(+id, updateDetalleFacturaDto);
   }
 
