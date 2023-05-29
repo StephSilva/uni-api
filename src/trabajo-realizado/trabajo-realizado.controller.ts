@@ -1,7 +1,8 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
-import { TrabajoRealizadoService } from './trabajo-realizado.service';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Req, Res } from '@nestjs/common';
 import { CreateTabajoRealizadoDto } from './dto/create-trabajo-realizado.dto';
 import { UpdateTrabajoRealizadoDto } from './dto/update-trabajo-realizado.dto';
+import { Request, Response } from 'express';
+import { TrabajoRealizadoService } from './trabajo-realizado.service';
 
 @Controller('trabajo-realizado')
 export class TrabajoRealizadoController {
@@ -13,9 +14,14 @@ export class TrabajoRealizadoController {
   }
 
   @Get()
-  findAll() {
-    return this.service.findAll();
-  }
+  //async findAll(@Req() request: Request, @Res() response: Response) {
+  //  try {
+  //   const data = await this.trabajorealizadoService.findAll(request.query.filtro as string);
+   //  response.status(200).send(data);
+  //  } catch (error) {
+  //    response.status(400).send("Error al encontrar trabajo");
+  //}
+ //} 
 
   @Get(':id')
   findOne(@Param('id') id: string) {

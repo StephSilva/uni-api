@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { ILike, Repository } from 'typeorm';
 import { CreateEmpleadoDto } from './dto/create-empleado.dto';
 import { UpdateEmpleadoDto } from './dto/update-empleado.dto';
 import { Empleado } from './entities/empleado.entity';
@@ -16,8 +16,16 @@ export class EmpleadoService {
     return this.repositorio.save(createEmpleadoDto);
   }
 
-  findAll() {
-    return this.repositorio.find({ relations: ['tipoEmpleado'] });
+  findAll(nombre = "") {
+    let filter = {};
+    //aplicamos el filtro si la variable nombre contiene algun texto a buscar
+    if(nombre.length){
+      //Buscamos por ilike para ignorar mayusculas o minusculas
+      // usamos el operador % al inicio y al final para buscar en la coincidencia en cualquier parte de la palabra
+      filter = { nombre: ILike(`%${nombre}%`) }
+    }
+
+    return this.repositorio.find({ relations: ['tipoEmpleado'], where: { ...filter } });
   }
 
   findOne(id: number) {
