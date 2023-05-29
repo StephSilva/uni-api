@@ -10,21 +10,20 @@ export class ClienteService {
   constructor(
     @InjectRepository(Cliente)
     private repositorio: Repository<Cliente>,
-  ) {}
+  ) { }
 
   create(createClienteDto: CreateClienteDto) {
     return this.repositorio.save(createClienteDto);
   }
 
-  findAll(nombre = "") {
-    let filter = {};
-    //aplicamos el filtro si la variable nombre contiene algun texto a buscar
-    if(nombre.length){
-      //Buscamos por ilike para ignorar mayusculas o minusculas
-      // usamos el operador % al inicio y al final para buscar en la coincidencia en cualquier parte de la palabra
-      filter = { nombre: ILike(`%${nombre}%`) }
-    }
-    return this.repositorio.find({ where: { ...filter }});
+  findAll(valueToSearch = "") {
+    return this.repositorio.find({
+      where: [
+        { nombre: ILike(`%${valueToSearch}%`) },
+        { ruc: ILike(`%${valueToSearch}%`) },
+        { telefono: ILike(`%${valueToSearch}%`) }
+      ]
+    });
   }
 
   findOne(id: number) {
