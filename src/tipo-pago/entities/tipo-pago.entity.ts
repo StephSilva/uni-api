@@ -1,5 +1,5 @@
-import { DetalleFactura } from "src/detalle-factura/entities/detalle-factura.entity";
-import { EntidadBase } from "src/utilidades/EntidadBase";
+import { DetalleFactura } from "../../detalle-factura/entities/detalle-factura.entity";
+import { EntidadBase } from "../../utilidades/EntidadBase";
 import { Column, Entity, OneToMany } from "typeorm";
 
 @Entity()

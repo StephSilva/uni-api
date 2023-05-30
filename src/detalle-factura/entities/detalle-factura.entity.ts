@@ -1,9 +1,9 @@
 import { TipoPago } from './../../tipo-pago/entities/tipo-pago.entity';
-import { Cliente } from 'src/cliente/entities/cliente.entity';
-import { TrabajoRealizado } from 'src/trabajo-realizado/entities/trabajo-realizado.entity';
-import { EntidadBase } from 'src/utilidades/EntidadBase';
+import { Cliente } from '../../cliente/entities/cliente.entity';
+import { TrabajoRealizado } from '../../trabajo-realizado/entities/trabajo-realizado.entity';
+import { EntidadBase } from '../../utilidades/EntidadBase';
 import { Column, Entity, ManyToOne, OneToMany } from 'typeorm';
-import { Empleado } from 'src/empleado/entities/empleado.entity';
+import { Empleado } from '../../empleado/entities/empleado.entity';
 
 @Entity()
 export class DetalleFactura extends EntidadBase {

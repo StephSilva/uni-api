@@ -21,7 +21,17 @@
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "dev": "docker-compose up",
     "docker:up": "docker-compose up --build",
-    "docker:down": "docker-compose down -v"
+    "docker:down": "docker-compose down -v",
+    "typeorm:cli": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli -f src/config/typeorm.config-migrations.ts",
+    "migration:generate": "npm run typeorm:cli -- migration:generate -d src/database/migration -n",
+    "migration:create": "npm run typeorm:cli -- migration:create -d src/database/migration -n",
+    "migration:run": "npm run typeorm:cli -- migration:run",
+    "migration:revert": "npm run typeorm:cli -- migration:revert",
+    "seed:config": "ts-node ./node_modules/typeorm-seeding/dist/cli.js config -n src/config/typeorm.config-migrations.ts",
+    "seed:run": "ts-node ./node_modules/typeorm-seeding/dist/cli.js seed -n src/config/typeorm.config-migrations.ts",
+    "schema:drop": "npm run typeorm:cli schema:drop",
+    "db:refresh": "npm run schema:drop && npm run migration:run && npm run seed:run",
+    "remove:spec": "rm -rf src/**/*.spec.ts"
   },
   "dependencies": {
     "@nestjs/common": "^8.0.0",
@@ -34,7 +44,8 @@
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
     "rxjs": "^7.2.0",
-    "typeorm": "^0.2.45"
+    "typeorm": "^0.2.45",
+    "typeorm-seeding": "^1.6.1"
   },
   "devDependencies": {
     "@nestjs/cli": "^8.0.0",
@@ -57,7 +68,8 @@
     "ts-loader": "^9.2.3",
     "ts-node": "^10.0.0",
     "tsconfig-paths": "^3.10.1",
-    "typescript": "^4.3.5"
+    "typescript": "^4.3.5",
+    "@faker-js/faker": "^7.6.0"
   },
   "jest": {
     "moduleFileExtensions": [

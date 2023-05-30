@@ -1,5 +1,5 @@
-import { TrabajoRealizado } from "src/trabajo-realizado/entities/trabajo-realizado.entity";
-import { EntidadBase } from "src/utilidades/EntidadBase";
+import { TrabajoRealizado } from "../../trabajo-realizado/entities/trabajo-realizado.entity";
+import { EntidadBase } from "../../utilidades/EntidadBase";
 import { Column, Entity, OneToMany } from "typeorm";
 
 @Entity()

@@ -1,6 +1,6 @@
-import { DetalleFactura } from 'src/detalle-factura/entities/detalle-factura.entity';
-import { TipoEmpleado } from 'src/tipo-empleado/entities/tipo-empleado.entity';
-import { EntidadBase } from 'src/utilidades/EntidadBase';
+import { DetalleFactura } from '../../detalle-factura/entities/detalle-factura.entity';
+import { TipoEmpleado } from '../../tipo-empleado/entities/tipo-empleado.entity';
+import { EntidadBase } from '../../utilidades/EntidadBase';
 import { Column, Entity, ManyToOne, OneToMany } from 'typeorm';
 
 @Entity()

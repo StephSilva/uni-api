@@ -1,11 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { CreateLoginDto } from 'src/login/dto/create-login.dto';
+import { CreateLoginDto } from '../login/dto/create-login.dto';
 import { ILike, Repository } from 'typeorm';
 import { CreateUsuarioDto } from './dto/create-usuario.dto';
 import { UpdateUsuarioDto } from './dto/update-usuario.dto';
 import { Usuario } from './entities/usuario.entity';
-import { searchEntityByColumns } from 'src/utilidades';
 
 @Injectable()
 export class UsuarioService {

@@ -13,22 +13,12 @@ import { TipoEmpleadoModule } from './tipo-empleado/tipo-empleado.module';
 import { TrabajoRealizadoModule } from './trabajo-realizado/trabajo-realizado.module';
 import { DetalleFacturaModule } from './detalle-factura/detalle-factura.module';
 import { LoginModule } from './login/login.module';
+import { typeOrmAsyncConfig } from './config/typeorm.config';
 
 @Module({
   imports: [
     ConfigModule.forRoot(),
-    TypeOrmModule.forRoot({
-      type: 'mysql',
-      host: process.env.DATABASE_HOST,
-      port: parseInt(process.env.DATABASE_PORT, 10),
-      username: process.env.DATABASE_USERNAME,
-      password: process.env.DATABASE_PASSWORD,
-      database: process.env.DATABASE_NAME,
-      autoLoadEntities: true,
-      synchronize: true,
-      // dropSchema: true,
-      logging: true
-    }),
+    TypeOrmModule.forRootAsync(typeOrmAsyncConfig),
     UsuarioModule,
     RolModule,
     TipoTrabajoModule,
@@ -43,4 +33,4 @@ import { LoginModule } from './login/login.module';
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule { }

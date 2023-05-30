@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { TrabajoRealizado } from 'src/trabajo-realizado/entities/trabajo-realizado.entity';
+import { TrabajoRealizado } from '../trabajo-realizado/entities/trabajo-realizado.entity';
 import { Repository, getConnection } from 'typeorm';
 import { CreateDetalleFacturaDto } from './dto/create-detalle-factura.dto';
 import { UpdateDetalleFacturaDto } from './dto/update-detalle-factura.dto';
@@ -11,7 +11,7 @@ export class DetalleFacturaService {
   constructor(
     @InjectRepository(DetalleFactura)
     private repositorio: Repository<DetalleFactura>,
-  ) {}
+  ) { }
 
   async create(createDetalleFacturaDto: CreateDetalleFacturaDto) {
     const { detalle, servicios } = createDetalleFacturaDto;
