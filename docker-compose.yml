@@ -2,7 +2,6 @@ version: '3.8'
 services:
   mysql:
     image: mariadb:10.5.5
-    container_name: paymentdatabase
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: '${MYSQL_ROOT_PASSWORD}'
@@ -18,7 +17,6 @@ services:
     ports:
       - '3307:${DATABASE_PORT}'
   api:
-    container_name: 'api'
     env_file:
       - .env
     build:
@@ -31,8 +29,8 @@ services:
     volumes:
       - .:/app/
       - /app/node_modules
-    # command: >
-    #   sh -c "yarn && yarn migration:run && yarn seed:run && yarn start:dev"
+    command: >
+      sh -c "yarn && yarn migration:run && yarn seed:run && yarn start:dev"
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
     env_file:
